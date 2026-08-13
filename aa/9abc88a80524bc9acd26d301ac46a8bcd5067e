@@ -1,0 +1,37 @@
+scripts/init_db.py
+  s_b74ddd73bb7d39::t_f822f335227cff 1-125
+README.md
+  s_b74ddd73bb7d39::t_f822f335227cff 1-35
+scripts/db.py
+  s_b74ddd73bb7d39::t_f822f335227cff 1-21
+scripts/export_review_data.py
+  s_b74ddd73bb7d39::t_f822f335227cff 1-80
+requirements.txt
+  s_b74ddd73bb7d39::t_f822f335227cff 1-4
+web/index.html
+  s_b74ddd73bb7d39::t_f822f335227cff 1-56
+web/app.js
+  s_b74ddd73bb7d39::t_f822f335227cff 1-195
+data/exports/review-data.json
+  s_b74ddd73bb7d39::t_c1341d3dc34f92 1-161
+web/styles.css
+  s_b74ddd73bb7d39::t_f822f335227cff 1-249
+scripts/ingest_pdf.py
+  s_b74ddd73bb7d39::t_f822f335227cff 1-93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "aa9abc88a80524bc9acd26d301ac46a8bcd5067e",
+  "prompts": {},
+  "sessions": {
+    "s_b74ddd73bb7d39": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ff8d4-8dc5-7b21-8c3f-f8ee794b0e50",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Yaaash <ykyashikakatyal@gmail.com>"
+    }
+  }
+}
