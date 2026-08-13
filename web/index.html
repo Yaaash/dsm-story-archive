@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DSM Story Archive Review</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Review Archive</p>
+        <h1>DSM Story Archive</h1>
+      </div>
+      <div class="language-toggle" role="group" aria-label="Language">
+        <button class="active" type="button" data-lang="hi">हिंदी</button>
+        <button type="button" data-lang="en">English</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section>
+          <h2>Books</h2>
+          <div id="books"></div>
+        </section>
+        <section>
+          <h2>Categories</h2>
+          <div id="categories"></div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <div class="toolbar">
+          <input id="search" type="search" placeholder="Search stories" />
+          <select id="categoryFilter" aria-label="Filter category">
+            <option value="">All categories</option>
+          </select>
+        </div>
+
+        <div class="split">
+          <section class="story-list">
+            <h2>Stories</h2>
+            <div id="stories"></div>
+          </section>
+          <article class="story-detail" id="storyDetail">
+            <p class="empty">Stories will appear here after OCR and segmentation.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,161 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "slug": "book-01-drishtant-sarovar",
+      "title_hi": "दृष्टांत सरोवर",
+      "title_en": "Drishtant Sarovar",
+      "language": "hi",
+      "source_pdf_path": "source/books/book-01-drishtant-sarovar.pdf",
+      "total_pages": 224,
+      "status": "ingested",
+      "created_at": "2026-08-13 02:05:29",
+      "updated_at": "2026-08-13 02:05:29",
+      "page_count": 224,
+      "extracted_pages": 0,
+      "ocr_pages": 224
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "slug": "uncategorized",
+      "name_hi": "अवर्गीकृत",
+      "name_en": "Uncategorized",
+      "description_hi": "कहानी की श्रेणी अभी तय नहीं हुई है।",
+      "description_en": "Stories awaiting category review.",
+      "sort_order": 0
+    },
+    {
+      "id": 2,
+      "slug": "bhakti",
+      "name_hi": "भक्ति",
+      "name_en": "Devotion",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 10
+    },
+    {
+      "id": 3,
+      "slug": "gyan",
+      "name_hi": "ज्ञान",
+      "name_en": "Wisdom",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 20
+    },
+    {
+      "id": 4,
+      "slug": "seva",
+      "name_hi": "सेवा",
+      "name_en": "Service",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 30
+    },
+    {
+      "id": 5,
+      "slug": "guru",
+      "name_hi": "गुरु",
+      "name_en": "Guru",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 40
+    },
+    {
+      "id": 6,
+      "slug": "karuna",
+      "name_hi": "करुणा",
+      "name_en": "Compassion",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 50
+    },
+    {
+      "id": 7,
+      "slug": "vairagya",
+      "name_hi": "वैराग्य",
+      "name_en": "Detachment",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 60
+    },
+    {
+      "id": 8,
+      "slug": "chamatkar",
+      "name_hi": "चमत्कार",
+      "name_en": "Miracles",
+      "description_hi": null,
+      "description_en": null,
+      "sort_order": 70
+    }
+  ],
+  "stories": [],
+  "page_samples": [
+    {
+      "id": 1,
+      "book_id": 1,
+      "page_number": 1,
+      "raw_text": "",
+      "extraction_method": "none",
+      "extraction_status": "needs_ocr",
+      "ocr_confidence": null,
+      "image_path": null,
+      "created_at": "2026-08-13 02:05:29",
+      "updated_at": "2026-08-13 02:05:29",
+      "book_slug": "book-01-drishtant-sarovar"
+    },
+    {
+      "id": 2,
+      "book_id": 1,
+      "page_number": 2,
+      "raw_text": "",
+      "extraction_method": "none",
+      "extraction_status": "needs_ocr",
+      "ocr_confidence": null,
+      "image_path": null,
+      "created_at": "2026-08-13 02:05:29",
+      "updated_at": "2026-08-13 02:05:29",
+      "book_slug": "book-01-drishtant-sarovar"
+    },
+    {
+      "id": 3,
+      "book_id": 1,
+      "page_number": 3,
+      "raw_text": "",
+      "extraction_method": "none",
+      "extraction_status": "needs_ocr",
+      "ocr_confidence": null,
+      "image_path": null,
+      "created_at": "2026-08-13 02:05:29",
+      "updated_at": "2026-08-13 02:05:29",
+      "book_slug": "book-01-drishtant-sarovar"
+    },
+    {
+      "id": 4,
+      "book_id": 1,
+      "page_number": 4,
+      "raw_text": "",
+      "extraction_method": "none",
+      "extraction_status": "needs_ocr",
+      "ocr_confidence": null,
+      "image_path": null,
+      "created_at": "2026-08-13 02:05:29",
+      "updated_at": "2026-08-13 02:05:29",
+      "book_slug": "book-01-drishtant-sarovar"
+    },
+    {
+      "id": 5,
+      "book_id": 1,
+      "page_number": 5,
+      "raw_text": "",
+      "extraction_method": "none",
+      "extraction_status": "needs_ocr",
+      "ocr_confidence": null,
+      "image_path": null,
+      "created_at": "2026-08-13 02:05:29",
+      "updated_at": "2026-08-13 02:05:29",
+      "book_slug": "book-01-drishtant-sarovar"
+    }
+  ]
+}
