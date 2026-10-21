@@ -20,12 +20,17 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
 }
 
 button,
 input,
 select {
   font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .topbar {
@@ -133,6 +138,7 @@ h2 {
   background: #fff;
   text-align: left;
   padding: 12px;
+  cursor: pointer;
 }
 
 .book-card + .book-card,
@@ -169,6 +175,17 @@ h2 {
 .status.warn {
   background: #f7eadf;
   color: var(--warn);
+}
+
+.translation-note {
+  margin: 14px 0;
+  padding: 10px 12px;
+  border: 1px solid #ead6bc;
+  border-radius: 8px;
+  background: #fff6ea;
+  color: var(--warn);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .toolbar {
@@ -214,6 +231,12 @@ h2 {
   background: var(--accent-soft);
 }
 
+.book-card.active,
+.category-row.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
 .story-detail {
   min-height: 420px;
 }
@@ -224,6 +247,23 @@ h2 {
   line-height: 1.85;
 }
 
+.mobile-back {
+  display: none;
+}
+
+.raw-ocr {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.raw-ocr summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
 .empty {
   color: var(--muted);
   margin: 0;
@@ -231,19 +271,193 @@ h2 {
 
 @media (max-width: 900px) {
   .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 18px;
+    min-height: auto;
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+    padding: 12px 14px;
   }
 
-  .layout,
-  .split,
-  .toolbar {
-    grid-template-columns: 1fr;
+  h1 {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+
+  .eyebrow {
+    display: none;
+  }
+
+  .language-toggle button {
+    min-width: 64px;
+    min-height: 34px;
+    padding: 0 10px;
   }
 
   .layout {
-    padding: 18px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px 12px 24px;
+  }
+
+  .sidebar {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .sidebar section,
+  .content,
+  .story-list,
+  .story-detail {
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .sidebar section {
+    min-width: 0;
+    padding: 12px;
+    overflow: hidden;
+  }
+
+  .sidebar h2 {
+    margin-bottom: 8px;
+  }
+
+  #books,
+  #categories {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    padding-bottom: 2px;
+    scroll-snap-type: x proximity;
+  }
+
+  .book-card,
+  .category-row {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    margin-top: 0;
+  }
+
+  .book-card {
+    width: min(78vw, 280px);
+  }
+
+  .category-row {
+    width: auto;
+    min-width: 132px;
+    max-width: 220px;
+  }
+
+  .book-card + .book-card,
+  .category-row + .category-row {
+    margin-top: 0;
+  }
+
+  .book-card strong,
+  .category-row strong,
+  .story-row strong {
+    overflow-wrap: anywhere;
+  }
+
+  .content {
+    min-width: 0;
+    padding: 12px;
+    overflow: hidden;
+  }
+
+  .toolbar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+    position: sticky;
+    top: 65px;
+    z-index: 4;
+    background: var(--panel);
+    padding-bottom: 8px;
+  }
+
+  .toolbar input,
+  .toolbar select {
+    min-height: 44px;
+  }
+
+  .split {
+    display: block;
+    min-height: 0;
+  }
+
+  .story-list,
+  .story-detail {
+    padding: 12px;
+  }
+
+  .story-list h2 {
+    margin-bottom: 8px;
+  }
+
+  .story-row {
+    min-height: 86px;
+    padding: 12px;
+  }
+
+  .story-detail {
+    display: none;
+    min-height: calc(100vh - 24px);
+  }
+
+  .mobile-back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    margin-bottom: 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--accent);
+    font-weight: 700;
+    padding: 0 12px;
+  }
+
+  .story-detail h2 {
+    font-size: 22px;
+    line-height: 1.35;
+  }
+
+  .story-body {
+    font-size: 18px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+  }
+
+  body.story-open .topbar,
+  body.story-open .sidebar,
+  body.story-open .toolbar,
+  body.story-open .story-list {
+    display: none;
+  }
+
+  body.story-open .layout {
+    display: block;
+    padding: 0;
+  }
+
+  body.story-open .content {
+    min-height: 100vh;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  body.story-open .story-detail {
+    display: block;
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    padding: 14px;
   }
 }
-

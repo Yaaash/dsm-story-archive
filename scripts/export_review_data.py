@@ -21,8 +21,29 @@ def main() -> None:
             SELECT
               b.*,
               COUNT(p.id) AS page_count,
-              SUM(CASE WHEN p.extraction_status = 'extracted' THEN 1 ELSE 0 END) AS extracted_pages,
-              SUM(CASE WHEN p.extraction_status = 'needs_ocr' THEN 1 ELSE 0 END) AS ocr_pages
+              SUM(CASE WHEN p.extraction_status IN ('extracted', 'ocr_extracted') THEN 1 ELSE 0 END) AS extracted_pages,
+              SUM(CASE WHEN p.extraction_status = 'needs_ocr' THEN 1 ELSE 0 END) AS ocr_pages,
+              SUM(CASE WHEN p.extraction_status = 'ocr_empty' THEN 1 ELSE 0 END) AS empty_pages,
+              (
+                SELECT COUNT(*)
+                FROM stories s
+                WHERE s.book_id = b.id AND COALESCE(s.is_active, 1) = 1
+              ) AS story_count,
+              (
+                SELECT COUNT(*)
+                FROM stories s
+                WHERE s.book_id = b.id
+                  AND COALESCE(s.is_active, 1) = 1
+                  AND s.correction_status != 'not_started'
+              ) AS corrected_story_count
+              ,
+              (
+                SELECT COUNT(*)
+                FROM stories s
+                WHERE s.book_id = b.id
+                  AND COALESCE(s.is_active, 1) = 1
+                  AND TRIM(COALESCE(s.content_en, '')) != ''
+              ) AS translated_story_count
             FROM books b
             LEFT JOIN pages p ON p.book_id = b.id
             GROUP BY b.id
@@ -35,6 +56,8 @@ def main() -> None:
             """
             SELECT
               s.*,
+              COALESCE(s.corrected_title_hi, s.title_hi) AS display_title_hi,
+              COALESCE(s.corrected_content_hi, s.content_hi) AS display_content_hi,
               c.slug AS category_slug,
               c.name_hi AS category_hi,
               c.name_en AS category_en,
@@ -44,6 +67,7 @@ def main() -> None:
             FROM stories s
             LEFT JOIN categories c ON c.id = s.category_id
             JOIN books b ON b.id = s.book_id
+            WHERE COALESCE(s.is_active, 1) = 1
             ORDER BY COALESCE(c.sort_order, 999), s.sort_order, s.id
             """,
         )
@@ -77,4 +101,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

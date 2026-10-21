@@ -51,6 +51,12 @@ CREATE TABLE IF NOT EXISTS stories (
   title_en TEXT,
   content_hi TEXT NOT NULL DEFAULT '',
   content_en TEXT NOT NULL DEFAULT '',
+  raw_title_hi TEXT,
+  raw_content_hi TEXT,
+  corrected_title_hi TEXT,
+  corrected_content_hi TEXT,
+  correction_status TEXT NOT NULL DEFAULT 'not_started',
+  is_active INTEGER NOT NULL DEFAULT 1,
   summary_hi TEXT,
   summary_en TEXT,
   start_page INTEGER,
@@ -88,6 +94,16 @@ CREATE INDEX IF NOT EXISTS idx_stories_category ON stories(category_id);
 """
 
 
+STORY_MIGRATIONS = [
+    ("raw_title_hi", "TEXT"),
+    ("raw_content_hi", "TEXT"),
+    ("corrected_title_hi", "TEXT"),
+    ("corrected_content_hi", "TEXT"),
+    ("correction_status", "TEXT NOT NULL DEFAULT 'not_started'"),
+    ("is_active", "INTEGER NOT NULL DEFAULT 1"),
+]
+
+
 SEED_CATEGORIES = [
     ("uncategorized", "अवर्गीकृत", "Uncategorized", "कहानी की श्रेणी अभी तय नहीं हुई है।", "Stories awaiting category review.", 0),
     ("bhakti", "भक्ति", "Devotion", None, None, 10),
@@ -97,12 +113,30 @@ SEED_CATEGORIES = [
     ("karuna", "करुणा", "Compassion", None, None, 50),
     ("vairagya", "वैराग्य", "Detachment", None, None, 60),
     ("chamatkar", "चमत्कार", "Miracles", None, None, 70),
+    ("dharma", "धर्म", "Dharma", None, None, 80),
+    ("niti", "नीति", "Ethics", None, None, 90),
+    ("samaj", "समाज", "Society", None, None, 100),
+    ("sadhana", "साधना", "Spiritual Practice", None, None, 110),
 ]
 
 
 def main() -> None:
     with connect() as conn:
         conn.executescript(SCHEMA)
+        existing_columns = {
+            row["name"] for row in conn.execute("PRAGMA table_info(stories)").fetchall()
+        }
+        for column, definition in STORY_MIGRATIONS:
+            if column not in existing_columns:
+                conn.execute(f"ALTER TABLE stories ADD COLUMN {column} {definition}")
+        conn.execute(
+            """
+            UPDATE stories
+            SET
+              raw_title_hi = COALESCE(raw_title_hi, title_hi),
+              raw_content_hi = COALESCE(raw_content_hi, content_hi)
+            """
+        )
         conn.executemany(
             """
             INSERT INTO categories
@@ -122,4 +156,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
